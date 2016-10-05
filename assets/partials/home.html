@@ -1,0 +1,137 @@
+<header>
+    <div class="navleft col-md-2 col-xs-3"><img src="{{common[0].Logo}}"></div>
+    <div class="navmiddle col-md-8 col-xs-6">{{common[0].Sitename}}</div>
+    <div class="navright col-md-2 col-xs-3"></div>
+</header>
+<div class="flwidth">
+    <div class="banner"></div>
+</div>
+<div class="cartimg">
+    <div class="shopping-cart">
+        <img src="assets/images/cartimg.png"><span class="quantity">0</span></a>
+        <div class="show-shopping-cart">
+            <h3 class="title">YOU HAVE <span class="text-warning">(0 ITEMS)</span> IN YOUR CART</h3>
+            <ul class="list-product">
+                <li ng-repeat="selectedBook in selectedBook">
+                    <div class="thumb">
+                        <img alt="" src="{{selectedBook.Image}}">
+                    </div>
+                    <div class="info">
+                        <h4 class="product-name"><a href="#/detail/{{selectedBook.Title}}">{{selectedBook.Title}}</a></h4>
+                        <span class="price"><i class="fa fa-inr"></i> {{selectedBook.New_Price}} </span>
+                        <a href="javascript:;" class="remove-item"><i class="fa fa-close"></i></a>
+                    </div>
+                </li>            
+            </ul>
+            <div class="sub-total"></div>
+            <div class="group-button">
+                <a class="button" href="javascript:;">Shopping Cart</a>
+                <a class="check-out button" href="javascript:;">CheckOut</a>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shiping-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="shipping in shippingData">
+                <div class="shiping-single">
+                    <img src="{{shipping.Icon}}" alt="">
+                    <div class="shiping-titel">
+                        <h3>{{shipping.Title}}</h3>
+                        <h6>{{shipping.Subtxt}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-6 col-xs-12">
+                <div class="shop-left-area">
+                    <div class="category">
+                        <h4>CATEGORY</h4>
+                        <div class="category-list">
+                            <ul>
+                                <li><a href="" ng-click="search.Category='Computers and Internet Books'">Computers and Internet Books</a></li>
+                                <li><a href="" ng-click="search.Category='Comics and Graphic Novels Books'">Comics and Graphic Novels Books</a></li>
+                                <li><a href="" ng-click="search.Category='Literature & Fiction Books'">Literature & Fiction Books</a></li>
+                                <li><a href="" ng-click="search.Category='General Preparation & Personality development'">General Preparation & Personality development</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10 col-sm-6 col-xs-12">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="Otherfilters">
+                            <label>Search:</label>
+                            <input type="text" ng-model="search.Title" placeholder="Search" /> <strong><a href="" ng-click="resetFilters()">Show All</a></strong> </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="tab-content">
+                        <div class="row tab-pane ac tive active gridview" id="grid">
+                            <div class="col-md-3 col-sm-6 col-xs-12 book{{BookDetails.BookId}} stock_{{BookDetails.Stock}}" ng-repeat="BookDetails in filtered = BookDetails | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                <div class="single-product {{BookDetails.Stock}}">
+                                    <div class="BookImg">
+                                        <a href="#/detail/{{BookDetails.Title}}" class="product-img">
+                                            <img alt="" src="{{BookDetails.Image}}" class="primary-img">
+                                        </a>
+                                        <span class="offer-titel">{{BookDetails.Stock}}</span>
+                                    </div>
+                                    <div class="pro-action">
+                                        <ul>
+                                            <li><a href="#/detail/{{BookDetails.Title}}" class="quick-view"><i class="fa fa-search"></i></a></li>
+                                            <li><a href="javascript:;" ng-click="wishlist()" class="favorite"><i class="fa fa-heart-o"></i></a></li>
+                                            <li><a href="javascript:;" ng-click="addcart1()" class="cart-bton"><i class="fa fa-shopping-basket"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pro-content">
+                                        <div class="product-titel">
+                                            <a href="#/detail/{{BookDetails.Title}}">{{BookDetails.Title}}</a>
+                                        </div>
+                                        <div class="pro-rating rstar3"></div>
+                                        <h4 class="list-pro-price"><span class="old"><i class="fa fa-inr"></i> {{BookDetails.New_Price}}</span><span class="new"><i class="fa fa-inr"></i>{{BookDetails.Old_Price}}</span></h4>
+                                        <div class="product-text">
+                                            <p>{{BookDetails.Short_description}}</p>
+                                        </div>
+
+                                        <div class="list-actions-btn">
+                                            <a href="#" class="cart-bton">Add To Cart</a>
+                                            <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                            <a href="#" class="favorite"><i class="fa fa-heart-o"></i></a>
+                                            <a href="#" class="cart"><i class="fa fa-shopping-basket"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-6 col-xs-12">
+                        <pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div class="footer-bottom-area">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <p>Copyright &copy; Wipro.com. </a> All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>

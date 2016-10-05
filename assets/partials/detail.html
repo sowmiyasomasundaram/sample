@@ -1,0 +1,170 @@
+<header>
+    <div class="navleft col-md-2 col-xs-3"><img src="{{common[0].Logo}}"></div>
+    <div class="navmiddle col-md-8 col-xs-6">{{common[0].Sitename}}</div>
+    <div class="navright col-md-2 col-xs-3"></div>
+</header>
+<div class="flwidth">
+    <div class="banner"></div>
+</div>
+<div class="cartimg">
+    <div class="shopping-cart">
+        <img src="assets/images/cartimg.png"><span class="quantity">0</span>
+        </a>
+        <div class="show-shopping-cart">
+            <h3 class="title">YOU HAVE <span class="text-warning">(0 ITEMS)</span> IN YOUR CART</h3>
+            <ul class="list-product">
+                <li>
+                    <div class="thumb">
+                        <img alt="" src="{{shoppingcart.Image}}">
+                    </div>
+                    <div class="info">
+                        <h4 class="product-name"><a href="javascript:;">{{shoppingcart.Title}}</a></h4>
+                        <span class="price"><i class="fa fa-inr"></i>{{shoppingcart.New_Price}} </span>
+                        <a href="#" class="remove-item"><i class="fa fa-close"></i></a>
+                    </div>
+                </li>                
+            </ul>
+            <div class="sub-total">Subtotal: <i class="fa fa-inr"></i>{{shoppingcart.New_Price}} </div>
+            <div class="group-button">
+                <a class="button" href="javascript:;">Shopping Cart</a>
+                <a class="check-out button" href="javascript:;">CheckOut</a>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="shiping-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12" ng-repeat="shipping in shippingData">
+                <div class="shiping-single">
+                    <img src="{{shipping.Icon}}" alt="">
+                    <div class="shiping-titel">
+                        <h3>{{shipping.Title}}</h3>
+                        <h6>{{shipping.Subtxt}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="row singl-pd">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="single-product-info sp-info-area">
+                        <div class="ProdImg col-sm-12 col-md-3 col-lg-3 "><img src="{{Detail.Image}}">
+                        </div>
+                        <div class="ProdDetails col-sm-12 col-md-8 col-lg-8">
+                            <div class="product-name">
+                                <h2>{{Detail.Title}}</h2>
+                            </div>
+                            <div class="rating-review">
+                                <div class="pro-rating rstar3"></div>
+                                <a href="javascript:;" class="reviews">{{reviews.length}} Reviews</a>
+                                <p class="in-stock">Availability:<span>{{Detail.Stock}}</span></p>
+                            </div>
+                            <h4 class="list-pro-price">
+                                <span class="old"><i class="fa fa-inr"></i> {{Detail.Old_Price}}</span>
+                                <span class="new"><i class="fa fa-inr"></i> {{Detail.New_Price}}</span>
+                            </h4>
+                            <div class="product-short-description">{{Detail.Short_description}} </div>
+                            <div class="product-options fix {{Detail.Stock}}">
+                                <div class="quantity-area">
+                                    <label>Qty :</label>
+                                    <div class="qty">
+                                        <input type="number" placeholder="1">
+                                    </div>
+                                </div>
+                                <div class="list-actions-btn">
+                                    <a href="javascript:;" ng-click="addcart()" class="cart-bton">Add To Cart</a>
+                                    <a href="javascript:;" ng-click="wishlist()" class="favorite"><i class="fa fa-heart-o"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div class="col-sm-12 col-md-12 col-lg-12 reviewarea">
+                    <div class="reviews-areas col-md-12">
+                        <div class="tabbable tabs-below">
+                            <ul class="nav nav-pills">
+                                <li ng-class="{active: selectedTab == 1}">
+                                    <a href="javascript:;" ng-click="selectedTab = 1;">Description</a>
+                                </li>
+                                <li ng-class="{active: selectedTab == 2}">
+                                    <a href="javascript:;" ng-click="selectedTab = 2;">Specification</a>
+                                </li>
+                                <li ng-class="{active: selectedTab == 3}">
+                                    <a href="javascript:;" class="Review" ng-click="selectedTab = 3;">Review</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" ng-show="selectedTab == 1">
+                                <p>{{Detail.Long_description}}</p>
+                            </div>
+                            <div class="tab-content tabss" ng-class="{selected: selectedTab == 2}" ng-show="selectedTab == 2">
+                                <p><b>Publication Year : </b>{{Detail.Publication_Year}} </p>
+                                <p><b>Author :</b> {{Detail.Author}}</p>
+                                <p ng-show="EBooks.Age_Group"><b>Age Group : </b>{{Detail.Age_Group}}</p>
+                                <p><b>Language : </b>{{Detail.Language}}</p>
+                            </div>
+                            <div class="tab-content" ng-show="selectedTab == 3">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div>
+                                            <div class="alert alert-danger" ng-if="reviews.length == 0">
+                                                {{name}} No reviews yet, be the first to review this Product!
+                                            </div>
+                                            <div class="col-sm-12" ng-repeat="review in reviews">
+                                                <blockquote class="row">
+                                                    <h3 class="pdt-title  rname col-sm-12">{{review.name}}</h3>
+                                                    <h3 class="pdt-title rstar rstar{{review.star}} col-sm-12"></h3>
+                                                    <p class="col-sm-12 rmsg">{{review.message}}</p>
+                                                    <h5 class="col-sm-12 remail"><small><i>{{review.email}}</i></small></h5>
+                                                </blockquote>
+                                            </div>
+                                            <form id="contact-form" class="form-inline form-group">
+                                                <div class="input-group reviewdiv col-lg-5">
+                                                    Add your Review
+                                                    <div ng-controller="DetailCtrl as rating" class="">
+                                                        <div star-rating ng-model="rating.rating1" max="5" on-rating-select="rating.rateFunction(rating)"></div>
+                                                        <div class="rate hide">{{rating.rating1}}</div>
+                                                    </div>
+                                                    <div class="control-group clear">
+                                                        <div class="reviewdiv">
+                                                            <input class="form-control" name="name" placeholder="Your Name" type="text" ng-model="review.username" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group clear">
+                                                        <input class="form-control" name="email" placeholder="Your Email" type="email" ng-model="review.email" />
+                                                    </div>
+                                                    <div class="control-group clear">
+                                                        <textarea class="form-control" rows="5" name="message" placeholder="Write a short review of the book" ng-model="review.message"></textarea>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                    <input type="submit" class="btn btn-block btn-success" ng-click="addReview()" placeholder="Submit review" value="Submit review" />
+                                                </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<footer class="footer-bottom-area">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <p>Copyright &copy; Wipro.com. </a> All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
